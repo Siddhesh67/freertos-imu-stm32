@@ -141,12 +141,12 @@ STM32_Programmer_CLI -c port=SWD -w Debug/freertos_imu.elf -v -rst
 **Why `xQueueOverwrite` instead of `xQueueSend`?**
 The queue depth is 1 — we always want the latest sensor reading, not a backlog of old data. `xQueueOverwrite` replaces the existing item rather than blocking.
 
-**Why is IWDG kicked from the lowest priority task?**
-If any higher priority task hangs and starves the LED task, the watchdog won't be refreshed and the MCU resets. This is a classic production embedded pattern.
+**Why was IWDG kicked from the lowest priority task?**
+If any higher-priority task hangs and starves the LED task, the watchdog won't be refreshed and the MCU resets. This is a classic production embedded pattern.
 
 **Why `vTaskDelayUntil` instead of `vTaskDelay`?**
 `vTaskDelayUntil` maintains a fixed period regardless of task execution time, preventing timing drift over long runs.
 
 ## Related Project
 
-[MPU6050 Sensor Fusion (Bare-metal)](../mpu6050_fusion) — The predecessor to this project, implementing Kalman filter sensor fusion on bare-metal STM32 without an RTOS.
+[MPU6050 Sensor Fusion — The predecessor to this project, implementing Kalman filter sensor fusion on bare-metal STM32 without an RTOS.
